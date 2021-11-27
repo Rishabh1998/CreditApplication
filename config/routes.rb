@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   root to: 'loan_application#new'
   resources :loan_application, only: [:new, :create]
-  resources :test_api
+  get 'success', to: 'loan_application#success'
 end

@@ -1,10 +1,12 @@
 class LoanApplication < ApplicationRecord
+    include ApiHelper
     validates :email, :pan_card, :aadhar_number, :account_number, :ifsc, :inflow_amount, :outflow_amount, presence: true
-    validates :email, uniqueness: true
 
     enum status: {:pending => 1, :approved => 2, :rejected => 3}
 
     before_save :calculate_cred_limit
+    before_save :get_credibility_score
+    before_save :check_if_system_recommended
 
     def calculate_cred_limit
         maximum_possible_emi = ((self.inflow_amount/2) - self.outflow_amount).round(2)
@@ -21,4 +23,31 @@ class LoanApplication < ApplicationRecord
 
         self.cred_limit = maximum_possible_emi * terms_in_month
     end
+
+    def get_credibility_score
+        response = ApiReader.new.get_request("https://api.fullcontact.com/v2/person.json?email=#{self.email}")
+        response = JSON.parse(response)
+        self.credibility_score = 0
+        if response["status"] == 200
+            response["socialProfiles"].each do |profile|
+                case profile["type"]
+                    when "facebook"
+                        self.credibility_score += 1
+                    when "twitter"
+                        self.credibility_score += 1
+                    when "linkedin"
+                        self.credibility_score += 1
+                end
+            end
+        end
+        approved_loans = LoanApplication.where(:email => self.email, status: 'approved').count
+        self.credibility_score += 1 if approved_loans > 0
+    end
+
+    def check_if_system_recommended
+        if self.credibility_score >= 2
+            self.system_recommendation = true
+        end
+    end
+        
 end
