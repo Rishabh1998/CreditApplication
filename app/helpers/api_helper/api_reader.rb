@@ -10,7 +10,7 @@ module ApiHelper
             https.use_ssl = true
 
             request = Net::HTTP::Get.new(url)
-            request["X-FullContact-APIKey"] = "uA6TuVzTHWADhBuZYaRND38YTsLgFihx" # Your API key here
+            request["X-FullContact-APIKey"] = "FULL_CONTACT_API_KEY" # Your API key here
             response = https.request(request)
             response.read_body
         end
