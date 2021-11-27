@@ -1,0 +1,52 @@
+<div class="container col-md-12">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= form_for(@loan_application, :url => {:controller => 'loan_application', :action => 'create'}) do |f| %>
+            <div class="row new_form">
+                <div class="form-group col-md-12">
+                    <%= f.label :email, 'Email' %>
+                    <%= f.text_field :email, class: 'form-control input feedr-main-input', required: true %>
+                </div>
+            
+                <div class="form-group col-md-12">
+                    <%= f.label :pan_card, 'Pan Card Number' %>
+                    <%= f.text_field :pan_card, class: 'form-control input feedr-main-input' %>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <%= f.label :aadhar_number, 'Aadhar Number' %>
+                    <%= f.text_field :aadhar_number, class: 'form-control input feedr-main-input' %>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <%= f.label :account_number, 'Bank Account Number' %>
+                    <%= f.text_field :account_number, class: 'form-control input feedr-main-input' %>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <%= f.label :ifsc, 'IFSC Code' %>
+                    <%= f.text_field :ifsc, class: 'form-control input feedr-main-input' %>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <%= f.label :inflow_amount, 'Inflow Amount in bank' %>
+                    <%= f.text_field :inflow_amount, class: 'form-control input feedr-main-input' %>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <%= f.label :outflow_amount, 'Outflow Amount from bank' %>
+                    <%= f.text_field :outflow_amount, class: 'form-control input feedr-main-input' %>
+                </div>
+
+            </div>
+          <div class="row">
+            <div class="col-md-3" align="center">
+              <%= f.submit "Create", class: 'btn btn-blue' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

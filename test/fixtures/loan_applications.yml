@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  pan_card: MyString
+  aadhar_number: MyString
+  account_number: MyString
+  ifsc: MyString
+  inflow_amount: 9.99
+  outflow_amount: 9.99
+  cred_limit: 9.99
+
+two:
+  email: MyString
+  pan_card: MyString
+  aadhar_number: MyString
+  account_number: MyString
+  ifsc: MyString
+  inflow_amount: 9.99
+  outflow_amount: 9.99
+  cred_limit: 9.99
